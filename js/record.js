@@ -93,7 +93,7 @@ function createAudioPlay() {
     async function processQueue() {
       while (messageQueue.length > 0) {
         const data = messageQueue.shift(); // 获取队列中的下一个数据
-        await pushDataToSource(sourceBuffer, base64ToBuffer(data.base64)); // 处理数据 音频base64 字符串 转 buffer
+        await pushDataToSource(sourceBuffer, base64ToBuffer(data.base64)); // 处理数据
       }
       mediaSource.endOfStream();
     }
@@ -121,8 +121,8 @@ function createAudioPlay() {
     const requestOptions = {
       method: 'POST',
       headers: {
-        // Batata-Auth 设备端调用 API的 鉴权token 先MOCK,  传入 任一 uuid 串讲解析成 uuid 用户
-        'Batata-Auth': 'xxxx', // 其他非 uuid字段将被固定解析成： 26294e3-e9f6-4292-b2f6-27167ecd5f19
+        // Batata-Auth 设备端调用 API的 鉴权token 先MOCK,  传入 任一 uuid字符串 将解析成 uuid 用户
+        'Batata-Auth': 'xxxx', // 其他非 uuid字字符串 将被固定解析成： 26294e3-e9f6-4292-b2f6-27167ecd5f19
       },
       body: formData,
     };

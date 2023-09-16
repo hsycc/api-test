@@ -47,11 +47,11 @@ class Stream {
       }
       done = true;
     } catch (e) {
-      // If the user calls `stream.controller.abort()`, we should exit without throwing.
+      // 调用 `stream.controller.abort()`, 退出
       if (e instanceof Error && e.name === 'AbortError') return;
       throw e;
     } finally {
-      // If the user `break`s, abort the ongoing request.
+      // 如果用户中断，则中止正在进行的请求。
       if (!done) this.controller.abort();
     }
   }
@@ -68,7 +68,6 @@ class SSEDecoder {
       line = line.substring(0, line.length - 1);
     }
     if (!line) {
-      // empty line and we didn't previously encounter any messages
       if (!this.event && !this.data.length) return null;
       const sse = {
         event: this.event,
